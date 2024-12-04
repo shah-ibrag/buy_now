@@ -1,4 +1,4 @@
-
+# db seeding
 categories = Category.create([
   { name: 'Vitamins' },
   { name: 'Minerals' },
