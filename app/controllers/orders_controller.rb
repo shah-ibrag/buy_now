@@ -7,6 +7,9 @@ class OrdersController < ApplicationController
     end
   
     def create
+      Rails.logger.debug "Customer Params: #{customer_params.inspect}"
+      Rails.logger.debug "Order Params: #{order_params.inspect}"
+  
       @customer = Customer.new(customer_params)
       if @customer.save
         @order = Order.new(order_params)
@@ -17,9 +20,11 @@ class OrdersController < ApplicationController
           session[:cart] = []
           redirect_to order_path(@order), notice: 'Order was successfully created.'
         else
+          Rails.logger.debug "Order Save Errors: #{@order.errors.full_messages}"
           render :new
         end
       else
+        Rails.logger.debug "Customer Save Errors: #{@customer.errors.full_messages}"
         render :new
       end
     end
@@ -75,7 +80,8 @@ class OrdersController < ApplicationController
           order: @order,
           product: product,
           quantity: item[:quantity],
-          price: product.price
+          price: product.price,
+          province: @customer.province
         )
       end
     end
