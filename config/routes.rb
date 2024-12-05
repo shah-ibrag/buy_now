@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "cart/show"
+  get "cart/add"
+  get "cart/remove"
   root "products#index"
   devise_for :administrators, controllers: { sessions: 'admins/sessions' }
   devise_for :users, controllers: { sessions: 'users/sessions' }
