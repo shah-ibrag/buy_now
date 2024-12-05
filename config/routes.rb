@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root "products#index"
-  devise_for :admins
+  devise_for :admins, controllers: { sessions: 'admins/sessions' }
+  devise_for :users, controllers: { sessions: 'users/sessions' }
   resources :products, only: [:index, :show] do
     collection do
       get 'search'

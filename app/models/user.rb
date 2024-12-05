@@ -1,7 +1,10 @@
 class User < ApplicationRecord
-  has_secure_password
-  has_many :orders
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+  ROLES = %w[user admin].freeze
 
-  validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 20 }
-  validates :password, presence: true, length: { minimum: 6 }
+  # Check if the user is an admin
+  def admin?
+    role == "admin"
+  end
 end
