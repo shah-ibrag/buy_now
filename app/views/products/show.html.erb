@@ -1,0 +1,15 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <% if @product.image.attached? %>
+        <%= image_tag @product.image, class: "img-fluid rounded shadow-sm", style: "max-height: 400px; object-fit: contain;" %>
+      <% end %>
+    </div>
+    <div class="col-md-6 d-flex flex-column justify-content-center">
+      <h2 class="mb-3" style="font-family: 'Pacifico', cursive;"><%= @product.name %></h2>
+      <p class="mb-4" style="font-family: 'Roboto', sans-serif; font-size: 1.1rem;"><%= @product.description %></p>
+      <p class="mb-4"><strong>Price: <%= number_to_currency(@product.price) %></strong></p>
+      <a href="#" class="btn btn-primary btn-lg">Add to Cart</a>
+    </div>
+  </div>
+</div>
