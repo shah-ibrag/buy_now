@@ -21,7 +21,7 @@
             <td><%= product.name %></td>
             <td><%= number_to_currency(product.price) %></td>
             <td>
-              <%= link_to 'Remove', remove_from_cart_path(product_id: product.id), method: :delete, class: 'btn btn-danger btn-sm' %>
+              <%= link_to 'Remove', remove_from_cart_path(product_id: product.id), method: :get, class: 'btn btn-danger btn-sm' %>
             </td>
           </tr>
         <% end %>

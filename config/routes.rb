@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   resources :categories, only: [:index, :show]
   get 'admin_dashboard', to: 'admin_dashboard#index'
 
-  resource :cart, only: [:show] do
+  resource :cart, only: [:show], controller: 'cart' do
     post 'add', to: 'cart#add', as: 'add_to'
-    delete 'remove', to: 'cart#remove', as: 'remove_from'
+    get 'remove', to: 'cart#remove', as: 'remove_from'
   end
 end

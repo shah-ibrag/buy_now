@@ -9,7 +9,7 @@
       <h2 class="mb-3" style="font-family: 'Pacifico', cursive;"><%= @product.name %></h2>
       <p class="mb-4" style="font-family: 'Roboto', sans-serif; font-size: 1.1rem;"><%= @product.description %></p>
       <p class="mb-4"><strong>Price: <%= number_to_currency(@product.price) %></strong></p>
-      <%= link_to 'Add to Cart', add_to_cart_path(product_id: @product.id), method: :post, class: 'btn btn-primary btn-lg' %>
+      <%= button_to 'Add to Cart', add_to_cart_path(product_id: @product.id), method: :post, class: 'btn btn-primary btn-lg' %>
     </div>
   </div>
 </div>
