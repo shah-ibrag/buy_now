@@ -25,7 +25,7 @@
 
       <div class="form-group mb-3">
         <%= f.label :province, class: 'form-label' %>
-        <%= f.select :province, options_for_select(['AB', 'BC', 'MB', 'NB', 'NL', 'NS', 'ON', 'PE', 'QC', 'SK']), class: 'form-select' %>
+        <%= f.select :province, options_for_select(['AB', 'BC', 'MB', 'NB', 'NL', 'NS', 'ON', 'PE', 'QC', 'SK']), name: 'customer[province]', class: 'form-select' %>
       </div>
 
       <div class="form-group mb-3">

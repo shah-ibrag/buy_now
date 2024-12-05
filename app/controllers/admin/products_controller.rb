@@ -1,54 +1,22 @@
-module Admin
-    class ProductsController < ApplicationController
-      before_action :authenticate_user!
-      before_action :ensure_admin!
-      before_action :set_product, only: [:edit, :update, :destroy]
+def create
+    Rails.logger.debug "Customer Params: #{customer_params.inspect}"
+    Rails.logger.debug "Order Params: #{order_params.inspect}"
   
-      def index
-        @products = Product.all
+    @customer = Customer.new(customer_params)
+    if @customer.save
+      @order = Order.new(order_params)
+      @order.customer = @customer
+      @order.total_price = calculate_total_price
+      if @order.save
+        save_order_items
+        session[:cart] = []
+        redirect_to order_path(@order), notice: 'Order was successfully created.'
+      else
+        Rails.logger.debug "Order Save Errors: #{@order.errors.full_messages}"
+        render :new
       end
-  
-      def new
-        @product = Product.new
-      end
-  
-      def create
-        @product = Product.new(product_params)
-        if @product.save
-          redirect_to admin_products_path, notice: 'Product was successfully created.'
-        else
-          render :new
-        end
-      end
-  
-      def edit
-      end
-  
-      def update
-        if @product.update(product_params)
-          redirect_to admin_products_path, notice: 'Product was successfully updated.'
-        else
-          render :edit
-        end
-      end
-  
-      def destroy
-        @product.destroy
-        redirect_to admin_products_path, notice: 'Product was successfully deleted.'
-      end
-  
-      private
-  
-      def set_product
-        @product = Product.find(params[:id])
-      end
-  
-      def product_params
-        params.require(:product).permit(:name, :description, :price, :category_id, :image)
-      end
-  
-      def ensure_admin!
-        redirect_to root_path, alert: "You are not authorized to access this page." unless current_user.admin?
-      end
+    else
+      Rails.logger.debug "Customer Save Errors: #{@customer.errors.full_messages}"
+      render :new
     end
   end
