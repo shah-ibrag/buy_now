@@ -1,2 +1,31 @@
-<h1>Cart#show</h1>
-<p>Find me in app/views/cart/show.html.erb</p>
+<!-- app/views/cart/show.html.erb -->
+
+<h2 class="text-center mt-5">Your Shopping Cart</h2>
+
+<div class="container mt-5">
+  <% if @cart.empty? %>
+    <p class="text-center">Your cart is empty.</p>
+  <% else %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart.each do |product_id| %>
+          <% product = Product.find(product_id) %>
+          <tr>
+            <td><%= product.name %></td>
+            <td><%= number_to_currency(product.price) %></td>
+            <td>
+              <%= link_to 'Remove', remove_from_cart_path(product_id: product.id), method: :delete, class: 'btn btn-danger btn-sm' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

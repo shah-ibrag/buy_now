@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get "cart/show"
-  get "cart/add"
-  get "cart/remove"
   root "products#index"
   devise_for :administrators, controllers: { sessions: 'admins/sessions' }
   devise_for :users, controllers: { sessions: 'users/sessions' }
@@ -18,4 +15,9 @@ Rails.application.routes.draw do
 
   resources :categories, only: [:index, :show]
   get 'admin_dashboard', to: 'admin_dashboard#index'
+
+  resource :cart, only: [:show] do
+    post 'add', to: 'cart#add', as: 'add_to'
+    delete 'remove', to: 'cart#remove', as: 'remove_from'
+  end
 end
