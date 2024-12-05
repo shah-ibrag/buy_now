@@ -21,4 +21,6 @@ Rails.application.routes.draw do
     get 'remove', to: 'cart#remove', as: 'remove_from'
     patch 'update_quantity', to: 'cart#update_quantity', as: 'update_quantity'
   end
+
+  resources :orders, only: [:new, :create, :show]
 end

@@ -1,0 +1,33 @@
+<h2>Order Confirmation</h2>
+
+<p>Thank you for your order, <%= @order.customer.name %>!</p>
+
+<h3>Order Details</h3>
+<p><strong>Order Number:</strong> <%= @order.id %></p>
+<p><strong>Total Price:</strong> <%= number_to_currency(@order.total_price) %></p>
+
+<h3>Shipping Address</h3>
+<p><%= @order.customer.address %></p>
+<p><%= @order.customer.city %>, <%= @order.customer.province %> <%= @order.customer.postal_code %></p>
+
+<h3>Items</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.order_items.each do |item| %>
+      <tr>
+        <td><%= item.product.name %></td>
+        <td><%= number_to_currency(item.price) %></td>
+        <td><%= item.quantity %></td>
+        <td><%= number_to_currency(item.price * item.quantity) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
