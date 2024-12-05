@@ -1,0 +1,19 @@
+<div class="container mt-5">
+  <h2 class="text-center">Categories</h2>
+  <div class="row">
+    <% @categories.each_slice(2) do |category_pair| %>
+      <% category_pair.each do |category| %>
+        <div class="col-md-6 mb-4">
+          <div class="card h-100 shadow-sm">
+            <% if category.products.any? && category.products.first.image.attached? %>
+              <%= image_tag category.products.first.image, class: "card-img-top img-fluid p-3", style: "height: 150px; object-fit: contain;" %>
+            <% end %>
+            <div class="card-body d-flex flex-column align-items-center">
+              <h5 class="card-title text-center"><%= link_to category.name, category_path(category) %></h5>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
