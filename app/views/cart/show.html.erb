@@ -11,15 +11,29 @@
         <tr>
           <th>Product</th>
           <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <% @cart.each do |product_id| %>
-          <% product = Product.find(product_id) %>
+        <% @cart.each do |item| %>
+          <% product = Product.find(item["product_id"]) %>
           <tr>
             <td><%= product.name %></td>
             <td><%= number_to_currency(product.price) %></td>
+            <td>
+              <%= form_with url: update_quantity_cart_path, method: :patch, local: true do |f| %>
+                <%= f.hidden_field :product_id, value: product.id %>
+                <div class="input-group">
+                  <%= f.number_field :quantity, value: item["quantity"], min: 1, class: "form-control" %>
+                  <div class="input-group-append">
+                    <%= f.submit "Update", class: "btn btn-primary" %>
+                  </div>
+                </div>
+              <% end %>
+            </td>
+            <td><%= number_to_currency(product.price * item["quantity"]) %></td>
             <td>
               <%= link_to 'Remove', remove_from_cart_path(product_id: product.id), method: :get, class: 'btn btn-danger btn-sm' %>
             </td>
