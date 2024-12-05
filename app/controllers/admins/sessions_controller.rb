@@ -7,14 +7,14 @@ class Admins::SessionsController < Devise::SessionsController
       yield resource if block_given?
       respond_with resource, location: after_sign_in_path_for(resource)
     else
-      redirect_to new_admin_session_path, alert: "Invalid email or password"
+      redirect_to new_administrator_session_path, alert: "Invalid email or password"
     end
   end
 
   protected
 
   def after_sign_in_path_for(resource)
-    if resource.admin?
+    if resource.is_a?(Administrator)
       admin_dashboard_path
     else
       root_path
