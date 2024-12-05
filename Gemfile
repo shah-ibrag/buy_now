@@ -1,4 +1,6 @@
 source "https://rubygems.org"
+gem 'bootstrap', '~> 5.1.3'
+gem 'sassc-rails'
 gem 'devise'
 gem 'active_storage_validations'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
