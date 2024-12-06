@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-gem 'bootstrap', '~> 5.1.3'
+gem 'bootstrap', '~> 5.3.3'
 gem 'sassc-rails'
 gem 'devise'
 gem 'active_storage_validations'
